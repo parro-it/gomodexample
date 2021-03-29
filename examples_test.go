@@ -1,4 +1,4 @@
-package {{.RepoName}}_test
+package gomodexample_test
 
 import (
 	"bytes"
@@ -7,15 +7,15 @@ import (
 	"io/fs"
 	"time"
 
-	"github.com/{{.Author}}/{{.RepoName}}"
+	"github.com/parro-it/gomodexample"
 )
 
 //go:embed fixtures
 var fixtureRootFS embed.FS
 var fixtureFS, _ = fs.Sub(fixtureRootFS, "fixtures")
 
-// This example show how to use {{.RepoName}}.Func()
+// This example show how to use gomodexample.Func()
 func ExampleFunc() {
-	fmt.Println({{.RepoName}}.Func())
+	fmt.Println(gomodexample.Func())
 	// Output: 42
 }
