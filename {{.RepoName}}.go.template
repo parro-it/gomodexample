@@ -1,0 +1,12 @@
+// Package {{.RepoName}}
+// {{.Repo.Description}}
+package {{.RepoName}}
+
+import (
+	"fmt"
+)
+
+// Func answers
+func Func() int {
+	return 42
+}

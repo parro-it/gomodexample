@@ -1,0 +1,43 @@
+name: initialize
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.x
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Run repo initialization
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ $GITHUB_REPOSITORY == 'parro-it/gomod' ]]; then
+            echo Running on template repo
+          else 
+            echo Running on a newly created repo
+            rm .github/workflows/initialize.yml
+            echo Initialize workflow removed
+
+            go get github.com/parro-it/templatedir/cli/tmpldir@v0.0.5
+            echo tmpldir installed
+            tmpldir
+          fi      
+      
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Initialization

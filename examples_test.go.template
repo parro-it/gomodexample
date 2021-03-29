@@ -1,0 +1,21 @@
+package {{.RepoName}}_test
+
+import (
+	"bytes"
+	"embed"
+	"fmt"
+	"io/fs"
+	"time"
+
+	"github.com/{{.Author}}/{{.RepoName}}"
+)
+
+//go:embed fixtures
+var fixtureRootFS embed.FS
+var fixtureFS, _ = fs.Sub(fixtureRootFS, "fixtures")
+
+// This example show how to use {{.RepoName}}.Func()
+func ExampleFunc() {
+	fmt.Println({{.RepoName}}.Func())
+	// Output: 42
+}
